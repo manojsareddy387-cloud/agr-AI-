@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#16834d">
+<title>AgriSmart AI | Smart Agriculture Assistant</title>
+<style>
+:root{--g:#16834d;--g2:#0e693d;--p:#f4fbf6;--bg:#f7f9f8;--card:#fff;--text:#17231d;--muted:#6c7972;--line:#e2eae5;--shadow:0 8px 28px rgba(20,55,36,.07);--danger:#c95445;--blue:#3b78b9}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text)}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.app{min-height:100vh}.sidebar{position:fixed;left:0;top:0;bottom:0;width:250px;background:#fff;border-right:1px solid var(--line);padding:22px 15px;z-index:20;display:flex;flex-direction:column}.brand{display:flex;align-items:center;gap:11px;padding:5px 10px 25px}.brand-icon{width:42px;height:42px;border-radius:12px;background:#e8f6ed;display:grid;place-items:center;font-size:25px}.brand-title{font-size:17px;font-weight:800}.brand-sub{font-size:10px;color:var(--muted);margin-top:2px}.nav{display:flex;align-items:center;gap:10px;width:100%;border:0;background:transparent;color:#59665f;padding:12px 13px;border-radius:10px;text-align:left;margin:2px 0;font-weight:600}.nav:hover,.nav.active{background:#eaf7ef;color:var(--g2)}.side-footer{margin-top:auto;border-top:1px solid var(--line);padding-top:15px}.role{font-size:11px;color:var(--muted);padding:0 13px 10px}.main{margin-left:250px;min-height:100vh}.topbar{height:70px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 30px;gap:18px;position:sticky;top:0;z-index:10}.menu{display:none;border:0;background:transparent;font-size:23px}.search{height:40px;max-width:560px;flex:1;background:#f5f7f6;border:1px solid var(--line);border-radius:10px;display:flex;align-items:center;padding:0 12px;color:var(--muted)}.search input{border:0;background:transparent;outline:0;width:100%;padding:0 9px;color:var(--text)}.top-right{margin-left:auto;display:flex;align-items:center;gap:14px}.round{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);background:#fff}.page{display:none;max-width:1450px;margin:auto;padding:30px}.page.active{display:block}.hero{background:linear-gradient(120deg,#e8f7ed,#f7fcf8);border:1px solid #d6ebdd;border-radius:18px;padding:30px;display:flex;justify-content:space-between;align-items:center;gap:25px;margin-bottom:20px}.eyebrow{margin:0 0 7px;color:var(--g);font-size:11px;font-weight:800;letter-spacing:1.5px}.hero h1,.title h1{margin:0;font-size:31px;letter-spacing:-.5px}.hero p:not(.eyebrow),.title p:not(.eyebrow){color:var(--muted);line-height:1.55;max-width:730px;margin-bottom:0}.btn{border:0;border-radius:9px;padding:11px 17px;font-weight:750}.primary{background:var(--g);color:#fff}.primary:hover{background:var(--g2)}.secondary{background:#fff;border:1px solid var(--line);color:var(--text)}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:20px}.stat,.card{background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:14px}.stat{padding:17px;display:flex;gap:13px;align-items:flex-start}.stat-icon{font-size:22px;width:43px;height:43px;border-radius:11px;background:#edf8f1;display:grid;place-items:center}.stat small{color:var(--muted);font-size:11px}.stat strong{font-size:23px;display:block;margin:2px 0}.stat em{font-size:11px;color:var(--muted);font-style:normal}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}.card{padding:21px;margin-bottom:20px}.card h2{font-size:18px;margin:0 0 5px}.muted{color:var(--muted);font-size:13px}.card-head{display:flex;justify-content:space-between;align-items:flex-start}.quick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}.quick button{border:1px solid var(--line);background:#f9fbfa;border-radius:11px;padding:15px;text-align:left}.quick button:hover{border-color:#a7d8b9;background:#f1faf4}.quick span{font-size:23px}.quick b,.quick small{display:block;margin-top:6px}.quick small{color:var(--muted)}.badge{font-size:11px;padding:5px 9px;border-radius:20px;background:#e8f7ee;color:var(--g2);font-weight:800}.insight{display:flex;gap:14px;background:#f3faf5;padding:17px;border-radius:11px;margin-top:15px}.insight-icon{font-size:31px}.insight p{color:var(--muted);line-height:1.5;font-size:13px}.link{border:0;background:transparent;color:var(--g2);font-weight:750;padding:0}.activity{display:flex;gap:13px;align-items:center;padding:13px 3px;border-bottom:1px solid #edf1ee}.activity:last-child{border-bottom:0}.activity-icon{width:40px;height:40px;border-radius:10px;background:#eff7f2;display:grid;place-items:center;font-size:20px}.activity small{display:block;color:var(--muted);font-size:11px;margin-top:4px}.status{margin-left:auto;font-size:10px;background:#eaf7ef;color:var(--g2);padding:5px 8px;border-radius:20px;font-weight:800}.title{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.drop{height:300px;border:2px dashed #b8d9c4;background:#f8fcf9;border-radius:13px;display:grid;place-items:center;text-align:center;cursor:pointer;overflow:hidden}.drop input{display:none}.drop b,.drop small{display:block;margin-top:7px}.drop small{color:var(--muted)}.drop img{max-width:100%;max-height:100%;object-fit:contain}.result{background:#f2faf4;border-radius:12px;padding:20px;min-height:300px}.result.empty{display:grid;place-items:center;text-align:center;color:var(--muted)}.result.empty .big{font-size:50px}.result h3{margin-bottom:5px}.warning{color:#a86b00;font-weight:800}.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}.field label{font-size:12px;font-weight:750;color:#46544c}.field input,.field select,.field textarea,.toolbar input,.toolbar select{width:100%;border:1px solid var(--line);border-radius:9px;padding:11px;margin-top:6px;outline:0;background:#fff}.textarea{min-height:100px;resize:vertical}.recs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.rec{background:#fff;border:1px solid var(--line);border-radius:13px;padding:18px}.rec-icon{font-size:34px}.score{color:var(--g);font-weight:850}.weather-card{display:flex;justify-content:space-between;align-items:center}.current{display:flex;gap:15px;align-items:center}.current-icon{font-size:55px}.temp{font-size:43px;font-weight:800}.weather-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.weather-item{background:#f8faf9;padding:13px;border-radius:10px}.weather-item small{display:block;color:var(--muted);margin-top:5px}.forecast{display:grid;gap:8px}.forecast-row{display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #edf1ee}.bars>div{margin:14px 0}.bar-head{display:flex;justify-content:space-between;font-size:12px}.bar{height:7px;background:#e9efeb;border-radius:10px;margin-top:7px}.bar i{display:block;height:100%;background:var(--g);border-radius:10px}.toolbar{display:flex;gap:10px;margin-bottom:18px}.toolbar input{flex:1;margin:0}.toolbar select{width:auto;margin:0}.items{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.item{background:#fff;border:1px solid var(--line);border-radius:13px;padding:18px}.item-top{display:flex;justify-content:space-between}.tag{font-size:10px;font-weight:850;padding:5px 8px;border-radius:20px;background:#fff0ea;color:#aa4e22}.tag.found{background:#e8f7ee;color:var(--g2)}.item h3{margin:14px 0 6px}.item p{font-size:13px;color:var(--muted);line-height:1.45}.meta{font-size:11px;color:var(--muted);line-height:1.8}.claim{width:100%;border:0;border-radius:8px;padding:10px;background:#edf8f1;color:var(--g2);font-weight:800;margin-top:11px}.admin-table{width:100%;border-collapse:collapse}.admin-table th,.admin-table td{text-align:left;padding:12px;border-bottom:1px solid var(--line);font-size:12px}.remove{border:1px solid #f0cbc5;background:#fff;color:var(--danger);padding:7px 10px;border-radius:7px}.modal{position:fixed;inset:0;background:rgba(9,27,18,.48);display:none;place-items:center;z-index:50;padding:18px}.modal.show{display:grid}.modal-box{width:min(680px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:16px;padding:24px;position:relative}.close{position:absolute;right:16px;top:12px;background:transparent;border:0;font-size:27px}.toast{position:fixed;right:20px;bottom:20px;background:#17231d;color:#fff;padding:12px 16px;border-radius:9px;display:none;z-index:70;font-size:13px}.hidden{display:none!important}
+@media(max-width:1000px){.sidebar{transform:translateX(-100%);transition:.2s}.sidebar.open{transform:translateX(0)}.main{margin-left:0}.menu{display:block}.stats{grid-template-columns:1fr 1fr}.grid2,.recs{grid-template-columns:1fr}.items{grid-template-columns:1fr 1fr}}
+@media(max-width:650px){.page{padding:18px}.topbar{padding:0 15px}.search{display:none}.hero{display:block;padding:23px}.hero .btn{margin-top:17px}.stats,.items,.formgrid,.weather-grid{grid-template-columns:1fr}.quick{grid-template-columns:1fr}.toolbar{display:grid}.toolbar select{width:100%}.weather-card{display:block}.weather-grid{margin-top:18px}.title{display:block}.title .btn{margin-top:12px}}
+
+.login-screen{position:fixed;inset:0;background:linear-gradient(135deg,#eaf8ef,#f7fbf8);display:grid;place-items:center;padding:20px;z-index:100}
+.login-card{width:min(440px,100%);background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px;box-shadow:0 20px 55px rgba(20,60,38,.13);text-align:center}
+.login-logo{width:64px;height:64px;border-radius:18px;background:#e8f6ed;display:grid;place-items:center;font-size:36px;margin:0 auto 12px}
+.login-card h1{margin:0;font-size:27px}.login-sub{color:var(--muted);margin:5px 0 20px}.login-tabs{display:flex;background:#f2f6f3;border-radius:9px;padding:4px;margin-bottom:18px}.login-tab{flex:1;border:0;background:transparent;padding:10px;border-radius:7px;font-weight:750;color:var(--muted)}.login-tab.active{background:#fff;color:var(--g);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.auth-field{text-align:left;margin:13px 0}.auth-field label{font-size:12px;font-weight:750}.auth-field input{width:100%;border:1px solid var(--line);border-radius:9px;padding:12px;margin-top:6px;outline:0}.location-access{display:flex;align-items:center;gap:10px;text-align:left;background:#f4faf6;border:1px solid #dceee2;padding:12px;border-radius:10px;margin:15px 0}.location-access>div{flex:1}.location-access small{display:block;color:var(--muted);font-size:10px;line-height:1.4;margin-top:3px}.location-access .btn{padding:8px 10px;font-size:11px;white-space:nowrap}.location-status{text-align:left;font-size:11px;color:var(--muted);margin:7px 0}.location-status.ok{color:var(--g2);font-weight:700}.auth-submit{width:100%;margin-top:8px}.login-note{font-size:10px;color:var(--muted);line-height:1.4;margin-bottom:0}
+
+
+.ai-mode-note{font-size:11px;background:#fff9e8;border:1px solid #f0dfaa;color:#816313;padding:9px 11px;border-radius:8px;margin-top:10px;line-height:1.4}
+
+
+.language-select{height:38px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--text);padding:0 9px;font-weight:650;font-size:12px;outline:0}
+.language-select:focus{border-color:#9acfb0}
+[dir="rtl"] .top-right{margin-left:0;margin-right:auto}
+
+</style>
+</head>
+<body>
+
+<div id="loginScreen" class="login-screen">
+  <div class="login-card">
+    <div class="login-logo">🌾</div>
+    <h1>AgriSmart AI</h1>
+    <p class="login-sub">Smart Agriculture Assistant</p>
+    <div class="login-tabs">
+      <button id="loginTab" class="login-tab active" onclick="showLogin()">Login</button>
+      <button id="registerTab" class="login-tab" onclick="showRegister()">Register</button>
+    </div>
+    <form id="authForm" onsubmit="handleAuth(event)">
+      <div id="nameField" class="auth-field hidden"><label>Full Name<input id="fullName" placeholder="Enter your name"></label></div>
+      <div class="auth-field"><label>College / Email<input id="email" type="email" placeholder="name@college.edu" required></label></div>
+      <div class="auth-field"><label>Password<input id="password" type="password" placeholder="Enter password" required minlength="6"></label></div>
+      <div id="locationAccessBox" class="location-access">
+        <div><b>📍 Location Access</b><small>Allow location to personalize weather and farming recommendations.</small></div>
+        <button type="button" class="btn secondary" onclick="requestLocation()">Allow Location</button>
+      </div>
+      <div id="locationStatus" class="location-status">Location: Not enabled</div>
+      <button class="btn primary auth-submit" type="submit" id="authButton">Login</button>
+    </form>
+    <p class="login-note">Demo authentication is enabled. Connect the FastAPI backend for real accounts and secure sessions.</p>
+  </div>
+</div>
+
+<div class="app">
+<aside class="sidebar" id="sidebar">
+  <div class="brand"><div class="brand-icon">🌾</div><div><div class="brand-title">AgriSmart AI</div><div class="brand-sub">Smart Agriculture Assistant</div></div></div>
+  <button class="nav active" data-page="dashboard">🏠 <span>Dashboard</span></button>
+  <button class="nav" data-page="crop">🔬 <span>Crop Disease AI</span></button>
+  <button class="nav" data-page="recommend">🌱 <span>Crop Recommendation</span></button>
+  <button class="nav" data-page="weather">☁️ <span>Weather & Soil</span></button>
+  <button class="nav" data-page="lost">🎒 <span>Lost & Found</span></button>
+  <button class="nav" data-page="returned">↩️ <span>Returned History</span></button>
+  <button class="nav" data-page="admin">🛡️ <span>Admin Panel</span></button>
+  <div class="side-footer"><div class="role">Logged in as <b id="loggedUserRole">Farmer</b></div><button class="nav" onclick="logout()">↪ <span>Logout</span></button></div>
+</aside>
+<main class="main">
+<header class="topbar"><button class="menu" onclick="toggleMenu()">☰</button><div class="search">⌕ <input id="search" placeholder="Search crops, items, reports..." oninput="globalSearch()"></div><div class="top-right">
+<button class="round" onclick="toast(t('noNotifications'))">🔔</button>
+<button class="round" onclick="requestLocation()" title="Location access">📍</button>
+<select id="languageSelect" class="language-select" onchange="changeLanguage(this.value)" aria-label="Language">
+<option value="en">English</option><option value="hi">हिन्दी</option><option value="te">తెలుగు</option><option value="kn">ಕನ್ನಡ</option><option value="ta">தமிழ்</option><option value="ml">മലയാളം</option>
+</select>
+<div class="round">🌾</div></div></header>
+
+<section id="dashboard" class="page active">
+<div class="hero"><div><p class="eyebrow">AI-POWERED FARMING</p><h1>Smarter Farming Starts Here</h1><p>Analyze crops, understand field conditions, get crop recommendations and access community services from one platform.</p></div><button class="btn primary" onclick="openPage('crop')">🔬 Analyze Crop</button></div>
+<div class="stats">
+<div class="stat"><div class="stat-icon">🌡️</div><div><small>Temperature</small><strong>28°C</strong><em>Feels like 30°C</em></div></div>
+<div class="stat"><div class="stat-icon">💧</div><div><small>Humidity</small><strong>72%</strong><em>Good for crops</em></div></div>
+<div class="stat"><div class="stat-icon">🌧️</div><div><small>Rain Chance</small><strong>35%</strong><em>Light rain possible</em></div></div>
+<div class="stat"><div class="stat-icon">🧪</div><div><small>Soil pH</small><strong>6.5</strong><em>Optimal range</em></div></div>
+</div>
+<div class="grid2">
+<div class="card"><div class="card-head"><div><h2>Quick Actions</h2><p class="muted">Start your farming analysis</p></div></div><div class="quick">
+<button onclick="openPage('crop')"><span>🔬</span><b>Crop Disease</b><small>Upload leaf image</small></button>
+<button onclick="openPage('recommend')"><span>🌱</span><b>Recommend Crop</b><small>Based on soil & season</small></button>
+<button onclick="openPage('weather')"><span>☁️</span><b>Weather & Soil</b><small>View farm conditions</small></button>
+<button onclick="openPage('lost')"><span>🎒</span><b>Lost & Found</b><small>Report or find items</small></button>
+</div></div>
+<div class="card"><div class="card-head"><div><h2>AI Farming Insight</h2><p class="muted">Personalized recommendation</p></div><span class="badge">✦ AI</span></div><div class="insight"><div class="insight-icon">🌾</div><div><b>Good conditions for Paddy</b><p>Current humidity and soil pH are suitable for paddy. Consider irrigation if rainfall remains low.</p><button class="link" onclick="openPage('recommend')">View recommendations →</button></div></div></div>
+</div>
+<div class="card"><div class="card-head"><div><h2>Recent Activity</h2><p class="muted">Latest platform activity</p></div></div>
+<div class="activity"><div class="activity-icon">🔬</div><div><b>Crop analysis completed</b><small>Possible Rice Blast · Recently</small></div><span class="status">Completed</span></div>
+<div class="activity"><div class="activity-icon">🌱</div><div><b>Crop recommendation generated</b><small>Paddy, Maize and Groundnut</small></div><span class="status">Completed</span></div>
+</div>
+</section>
+
+<section id="crop" class="page"><div class="title"><div><p class="eyebrow">AI ANALYSIS</p><h1>Crop Disease Detection</h1><p>Upload a clear crop or leaf image to identify possible diseases and receive farming guidance.</p></div></div>
+<div class="grid2"><div class="card"><h2>Upload Crop Image</h2>
+<p class="muted">PNG, JPG or JPEG · Maximum 10 MB</p>
+<div class="field" style="margin:12px 0">
+<label>Crop Type
+<select id="cropType">
+<option value="auto">Auto / AI Detect Crop</option>
+<option value="rice">Rice / Paddy</option>
+<option value="tomato">Tomato</option>
+<option value="potato">Potato</option>
+<option value="maize">Maize</option>
+<option value="cotton">Cotton</option>
+<option value="chilli">Chilli</option>
+<option value="grape">Grape</option>
+<option value="apple">Apple</option>
+</select>
+</label>
+</div><label class="drop" id="drop"><input id="cropFile" type="file" accept="image/*" onchange="preview(event)"><div id="dropText">📷<b>Click to upload</b><small>Use a clear photo of the affected leaf</small></div><img id="cropPreview" class="hidden"></label><button class="btn primary" style="width:100%;margin-top:14px" onclick="analyze()">✦ Analyze with AI</button></div>
+<div class="card"><div id="analysis" class="result empty"><div><div class="big">🌿</div><h2>AI analysis results</h2><p>Upload an image and start the analysis.</p></div></div></div></div>
+<div class="card"><h2>Common Disease Guidance</h2><div class="recs"><div class="rec"><b>🍂 Leaf Spot</b><p class="muted">Remove infected leaves and avoid excessive leaf wetness.</p></div><div class="rec"><b>🦠 Bacterial Blight</b><p class="muted">Improve drainage and follow locally recommended treatment.</p></div><div class="rec"><b>🌿 Powdery Mildew</b><p class="muted">Improve air circulation and monitor humidity.</p></div></div></section>
+
+<section id="recommend" class="page"><div class="title"><div><p class="eyebrow">SMART RECOMMENDATION</p><h1>Crop Recommendation</h1><p>Enter your field conditions to generate personalized crop suggestions.</p></div></div>
+<div class="card"><div class="formgrid">
+<div class="field"><label>Location / District
+<select id="farmLocation" onchange="updateFarmLocation(this.value)">
+<option value="">Select Andhra Pradesh district</option><option value="alluri">Alluri Sitharama Raju</option><option value="anakapalli">Anakapalli</option><option value="ananthapuramu">Ananthapuramu</option><option value="annamayya">Annamayya</option><option value="bapatla">Bapatla</option><option value="chittoor">Chittoor</option><option value="eastgodavari">East Godavari</option><option value="eluru">Eluru</option><option value="guntur">Guntur</option><option value="kakinada">Kakinada</option><option value="konaseema">Dr. B.R. Ambedkar Konaseema</option><option value="krishna">Krishna</option><option value="kurnool">Kurnool</option><option value="manyam">Manyam</option><option value="markapuram">Markapuram</option><option value="nandyal">Nandyal</option><option value="ntr">NTR</option><option value="palnadu">Palnadu</option><option value="prakasam">Prakasam</option><option value="polavaram">Polavaram</option><option value="spsr">SPSR Nellore</option><option value="srisathyasai">Sri Sathya Sai</option><option value="srikakulam">Srikakulam</option><option value="tirupati">Tirupati</option><option value="visakhapatnam">Visakhapatnam</option><option value="vizianagaram">Vizianagaram</option><option value="westgodavari">West Godavari</option><option value="ysr">YSR Kadapa</option>
+</select></label></div>
+<div class="field"><label>Village
+<select id="farmVillage" onchange="updateFarmVillage(this.value)">
+<option value="">Select village</option>
+</select></label></div>
+<div class="field"><label>Season<select id="season"><option>Kharif</option><option>Rabi</option><option>Summer</option></select></label></div>
+<div class="field"><label>Soil Type<select><option>Loamy</option><option>Clay</option><option>Sandy</option><option>Black Soil</option></select></label></div><div class="field"><label>Soil pH<input id="ph" type="number" value="6.5" step=".1"></label></div>
+<div class="field"><label>Nitrogen (N)<input value="80" type="number"></label></div><div class="field"><label>Phosphorus (P)<input value="45" type="number"></label></div>
+<div class="field"><label>Potassium (K)<input value="50" type="number"></label></div><div class="field"><label>Water Availability<select><option>Good</option><option>Moderate</option><option>Low</option></select></label></div>
+</div><button class="btn primary" onclick="recommend()">✦ Generate AI Recommendation</button></div><div id="recs" class="recs"></div></section>
+
+<section id="weather" class="page"><div class="title"><div><p class="eyebrow">FARM CONDITIONS</p><h1>Weather & Soil</h1><p>Monitor environmental conditions that influence your farming decisions.</p><div id="weatherLocation" class="muted">📍 Location access not enabled</div></div><div><button class="btn secondary" onclick="requestLocation()">📍 Update Location</button> <button class="btn secondary" onclick="toast('Weather refreshed')">↻ Refresh</button></div></div>
+<div class="card weather-card"><div class="current"><div class="current-icon">☀️</div><div><div class="temp" id="weatherTemp">28°C</div><div class="muted" id="weatherCondition">Partly Cloudy · Current conditions</div></div></div><div style="min-width:250px;margin:0 20px"><label style="font-size:12px;font-weight:750">Select Andhra Pradesh Location<select id="weatherDistrict" onchange="updateFarmLocation(this.value)" style="width:100%;border:1px solid var(--line);border-radius:9px;padding:10px;margin-top:6px;background:#fff"><option value="alluri">Alluri Sitharama Raju</option><option value="anakapalli">Anakapalli</option><option value="ananthapuramu">Ananthapuramu</option><option value="annamayya">Annamayya</option><option value="bapatla">Bapatla</option><option value="chittoor">Chittoor</option><option value="eastgodavari">East Godavari</option><option value="eluru">Eluru</option><option value="guntur">Guntur</option><option value="kakinada">Kakinada</option><option value="konaseema">Dr. B.R. Ambedkar Konaseema</option><option value="krishna">Krishna</option><option value="kurnool">Kurnool</option><option value="manyam">Manyam</option><option value="markapuram">Markapuram</option><option value="nandyal">Nandyal</option><option value="ntr">NTR</option><option value="palnadu">Palnadu</option><option value="prakasam">Prakasam</option><option value="polavaram">Polavaram</option><option value="spsr">SPSR Nellore</option><option value="srisathyasai">Sri Sathya Sai</option><option value="srikakulam">Srikakulam</option><option value="tirupati">Tirupati</option><option value="visakhapatnam">Visakhapatnam</option><option value="vizianagaram">Vizianagaram</option><option value="westgodavari">West Godavari</option><option value="ysr">YSR Kadapa</option></select></label>
+<label style="font-size:12px;font-weight:750;display:block;margin-top:8px">Village
+<select id="weatherVillage" onchange="updateFarmVillage(this.value)" style="width:100%;border:1px solid var(--line);border-radius:9px;padding:10px;margin-top:6px;background:#fff">
+<option value="">Select village</option>
+</select></label></div><div class="weather-grid"><div class="weather-item">💧 <b>72%</b><small>Humidity</small></div><div class="weather-item">💨 <b>14 km/h</b><small>Wind</small></div><div class="weather-item">🌧️ <b>35%</b><small>Rain chance</small></div><div class="weather-item">☀️ <b>6.2</b><small>UV Index</small></div></div></div>
+<div class="grid2"><div class="card"><h2>7-Day Forecast</h2><div class="forecast"><div class="forecast-row"><span>Today</span><b>☀️ 28°</b><small>35% rain</small></div><div class="forecast-row"><span>Thursday</span><b>🌦️ 27°</b><small>55% rain</small></div><div class="forecast-row"><span>Friday</span><b>🌧️ 26°</b><small>70% rain</small></div><div class="forecast-row"><span>Saturday</span><b>⛅ 29°</b><small>25% rain</small></div><div class="forecast-row"><span>Sunday</span><b>☀️ 30°</b><small>10% rain</small></div></div></div>
+<div class="card"><h2>Soil Conditions</h2><div class="bars"><div><div class="bar-head"><span>Moisture</span><b>68%</b></div><div class="bar"><i style="width:68%"></i></div></div><div><div class="bar-head"><span>Nitrogen</span><b>80 kg/ha</b></div><div class="bar"><i style="width:75%"></i></div></div><div><div class="bar-head"><span>Phosphorus</span><b>45 kg/ha</b></div><div class="bar"><i style="width:60%"></i></div></div><div><div class="bar-head"><span>Potassium</span><b>50 kg/ha</b></div><div class="bar"><i style="width:65%"></i></div></div></div></div></div></section>
+
+<section id="lost" class="page"><div class="title"><div><p class="eyebrow">COMMUNITY</p><h1>Lost & Found</h1><p>Report lost or found items and help your community return them.</p></div><button class="btn primary" onclick="modal(true)">＋ Report Item</button></div>
+<div class="toolbar"><input id="itemSearch" placeholder="🔍 Search item name or description" oninput="renderItems()"><select id="cat" onchange="renderItems()"><option value="">All categories</option><option>Documents</option><option>Electronics</option><option>Keys</option><option>Other</option></select><select id="type" onchange="renderItems()"><option value="">Lost & Found</option><option>Lost</option><option>Found</option></select></div><div id="items" class="items"></div></section>
+
+<section id="returned" class="page"><div class="title"><div><p class="eyebrow">HISTORY</p><h1>Returned Items</h1><p>Track items successfully returned to their owners.</p></div></div><div class="card"><div class="activity"><div class="activity-icon">🎒</div><div><b>College ID Card</b><small>Returned · Sep 28, 2026 · Main Block</small></div><span class="status">Returned</span></div><div class="activity"><div class="activity-icon">🔑</div><div><b>Bike Keys</b><small>Returned · Sep 24, 2026 · Parking Area</small></div><span class="status">Returned</span></div></div></section>
+
+<section id="admin" class="page"><div class="title"><div><p class="eyebrow">ADMINISTRATION</p><h1>Admin Panel</h1><p>Manage users and moderate community posts.</p></div></div><div class="stats"><div class="stat"><div class="stat-icon">👥</div><div><small>Total Users</small><strong>1,248</strong></div></div><div class="stat"><div class="stat-icon">🎒</div><div><small>Active Posts</small><strong>86</strong></div></div><div class="stat"><div class="stat-icon">↩️</div><div><small>Returned</small><strong>54</strong></div></div><div class="stat"><div class="stat-icon">⚠️</div><div><small>Flagged</small><strong>7</strong></div></div></div><div class="card"><h2>Moderation Queue</h2><div id="moderation"></div></div></section>
+</main></div>
+
+<div class="modal" id="modal"><div class="modal-box"><button class="close" onclick="modal(false)">×</button><h2>Report Lost / Found Item</h2><p class="muted">Add the item details so others can identify it.</p><div class="formgrid">
+<div class="field"><label>Item Name<input id="iname" placeholder="e.g. Black Wallet"></label></div><div class="field"><label>Type<select id="itype"><option>Lost</option><option>Found</option></select></label></div>
+<div class="field"><label>Category<select id="icat"><option>Documents</option><option>Electronics</option><option>Keys</option><option>Other</option></select></label></div><div class="field"><label>Date<input id="idate" type="date"></label></div>
+<div class="field"><label>Location<input id="iloc" placeholder="e.g. Library"></label></div><div class="field"><label>Photo<input id="iphoto" type="file" accept="image/*"></label></div></div>
+<div class="field"><label>Description<textarea class="textarea" id="idesc" placeholder="Describe the item and identifying marks"></textarea></label></div><button class="btn primary" style="width:100%;margin-top:15px" onclick="addItem()">Submit Report</button></div></div>
+<div id="toastBox" class="toast"></div>
+
+<script>
+
+const translations = {
+  en:{
+    dashboard:"Dashboard",cropDisease:"Crop Disease AI",cropRecommendation:"Crop Recommendation",weatherSoil:"Weather & Soil",
+    lostFound:"Lost & Found",returned:"Returned History",admin:"Admin Panel",logout:"Logout",
+    search:"Search crops, items, reports...",aiFarming:"AI-POWERED FARMING",heroTitle:"Smarter Farming Starts Here",
+    heroDesc:"Analyze crops, understand field conditions, get crop recommendations and access community services from one platform.",
+    analyzeCrop:"Analyze Crop",temperature:"Temperature",humidity:"Humidity",rainChance:"Rain Chance",soilPh:"Soil pH",
+    quickActions:"Quick Actions",startAnalysis:"Start your farming analysis",cropDisease:"Crop Disease",uploadLeaf:"Upload leaf image",
+    recommendCrop:"Recommend Crop",basedSoil:"Based on soil & season",weather:"Weather & Soil",viewConditions:"View farm conditions",
+    community:"Lost & Found",reportFind:"Report or find items",aiInsight:"AI Farming Insight",personalized:"Personalized recommendation",
+    paddyInsight:"Good conditions for Paddy",recentActivity:"Recent Activity",latestActivity:"Latest platform activity",
+    cropAnalysisDone:"Crop analysis completed",recommendationGenerated:"Crop recommendation generated",completed:"Completed",
+    aiAnalysis:"AI ANALYSIS",diseaseTitle:"Crop Disease Detection",diseaseDesc:"Upload a clear crop or leaf image to identify possible diseases and receive farming guidance.",
+    uploadCrop:"Upload Crop Image",cropType:"Crop Type",autoDetect:"Auto / AI Detect Crop",clickUpload:"Click to upload",
+    analyzeAI:"Analyze with AI",analysisResults:"AI analysis results",uploadStart:"Upload an image and start the analysis.",
+    smartRecommendation:"SMART RECOMMENDATION",recommendationTitle:"Crop Recommendation",recommendationDesc:"Enter your field conditions to generate personalized crop suggestions.",
+    location:"Location",season:"Season",soilType:"Soil Type",water:"Water Availability",generate:"Generate AI Recommendation",
+    farmConditions:"FARM CONDITIONS",weatherTitle:"Weather & Soil",weatherDesc:"Monitor environmental conditions that influence your farming decisions.",
+    updateLocation:"Update Location",refresh:"Refresh",forecast:"7-Day Forecast",soilConditions:"Soil Conditions",
+    communityTitle:"Lost & Found",communityDesc:"Report lost or found items and help your community return them.",reportItem:"Report Item",
+    returnedTitle:"Returned Items",returnedDesc:"Track items successfully returned to their owners.",administration:"ADMINISTRATION",
+    adminTitle:"Admin Panel",adminDesc:"Manage users and moderate community posts.",totalUsers:"Total Users",activePosts:"Active Posts",
+    returnedCount:"Returned",flagged:"Flagged",moderation:"Moderation Queue",noNotifications:"No new notifications",
+    locationNotEnabled:"📍 Location access not enabled",locationEnabled:"📍 Location access enabled"
+  },
+  hi:{
+    dashboard:"डैशबोर्ड",cropDisease:"फसल रोग AI",cropRecommendation:"फसल सुझाव",weatherSoil:"मौसम और मिट्टी",lostFound:"खोया और पाया",returned:"वापसी इतिहास",admin:"एडमिन पैनल",logout:"लॉगआउट",
+    search:"फसल, वस्तु, रिपोर्ट खोजें...",aiFarming:"AI आधारित खेती",heroTitle:"स्मार्ट खेती की शुरुआत यहाँ से",heroDesc:"फसल का विश्लेषण करें, खेत की स्थिति समझें, फसल सुझाव प्राप्त करें और सामुदायिक सेवाओं का उपयोग करें।",analyzeCrop:"फसल का विश्लेषण करें",
+    temperature:"तापमान",humidity:"नमी",rainChance:"बारिश की संभावना",soilPh:"मिट्टी का pH",quickActions:"त्वरित कार्य",startAnalysis:"खेती का विश्लेषण शुरू करें",cropDisease:"फसल रोग",uploadLeaf:"पत्ती की फोटो अपलोड करें",recommendCrop:"फसल सुझाएँ",basedSoil:"मिट्टी और मौसम के आधार पर",weather:"मौसम और मिट्टी",viewConditions:"खेत की स्थिति देखें",community:"खोया और पाया",reportFind:"वस्तु रिपोर्ट करें या खोजें",aiInsight:"AI खेती सुझाव",personalized:"व्यक्तिगत सुझाव",paddyInsight:"धान के लिए अच्छी परिस्थितियाँ",recentActivity:"हाल की गतिविधि",latestActivity:"नवीनतम गतिविधि",cropAnalysisDone:"फसल विश्लेषण पूरा हुआ",recommendationGenerated:"फसल सुझाव तैयार हुआ",completed:"पूरा हुआ",
+    aiAnalysis:"AI विश्लेषण",diseaseTitle:"फसल रोग पहचान",diseaseDesc:"संभावित रोग पहचानने और खेती की सलाह पाने के लिए फसल या पत्ती की स्पष्ट फोटो अपलोड करें।",uploadCrop:"फसल की फोटो अपलोड करें",cropType:"फसल का प्रकार",autoDetect:"ऑटो / AI पहचान",clickUpload:"अपलोड करने के लिए क्लिक करें",analyzeAI:"AI से विश्लेषण करें",analysisResults:"AI विश्लेषण परिणाम",uploadStart:"फोटो अपलोड करके विश्लेषण शुरू करें",
+    smartRecommendation:"स्मार्ट सुझाव",recommendationTitle:"फसल सुझाव",recommendationDesc:"व्यक्तिगत फसल सुझाव पाने के लिए खेत की जानकारी दर्ज करें।",location:"स्थान",season:"मौसम",soilType:"मिट्टी का प्रकार",water:"पानी की उपलब्धता",generate:"AI सुझाव तैयार करें",
+    farmConditions:"खेत की स्थिति",weatherTitle:"मौसम और मिट्टी",weatherDesc:"खेती को प्रभावित करने वाली पर्यावरणीय स्थितियों पर नज़र रखें।",updateLocation:"स्थान अपडेट करें",refresh:"रिफ्रेश",forecast:"7 दिन का पूर्वानुमान",soilConditions:"मिट्टी की स्थिति",
+    communityTitle:"खोया और पाया",communityDesc:"खोई या मिली वस्तु की रिपोर्ट करें और समुदाय की मदद करें।",reportItem:"वस्तु रिपोर्ट करें",returnedTitle:"वापस की गई वस्तुएँ",returnedDesc:"मालिकों को लौटाई गई वस्तुओं का इतिहास देखें",administration:"प्रशासन",adminTitle:"एडमिन पैनल",adminDesc:"उपयोगकर्ताओं और पोस्ट की निगरानी करें",totalUsers:"कुल उपयोगकर्ता",activePosts:"सक्रिय पोस्ट",returnedCount:"वापस की गई",flagged:"चिह्नित",moderation:"मॉडरेशन सूची",noNotifications:"कोई नई सूचना नहीं"
+  },
+  te:{
+    dashboard:"డ్యాష్‌బోర్డ్",cropDisease:"పంట వ్యాధి AI",cropRecommendation:"పంట సిఫార్సు",weatherSoil:"వాతావరణం & నేల",lostFound:"పోయినవి & దొరికినవి",returned:"తిరిగి ఇచ్చిన చరిత్ర",admin:"అడ్మిన్ ప్యానెల్",logout:"లాగ్ అవుట్",
+    search:"పంటలు, వస్తువులు, నివేదికలు వెతకండి...",aiFarming:"AI ఆధారిత వ్యవసాయం",heroTitle:"స్మార్ట్ వ్యవసాయం ఇక్కడ ప్రారంభం",heroDesc:"పంటలను విశ్లేషించండి, పొలం పరిస్థితులను తెలుసుకోండి, పంట సిఫార్సులు పొందండి మరియు కమ్యూనిటీ సేవలను ఉపయోగించండి.",analyzeCrop:"పంటను విశ్లేషించండి",
+    temperature:"ఉష్ణోగ్రత",humidity:"తేమ",rainChance:"వర్షం అవకాశం",soilPh:"నేల pH",quickActions:"త్వరిత చర్యలు",startAnalysis:"వ్యవసాయ విశ్లేషణ ప్రారంభించండి",cropDisease:"పంట వ్యాధి",uploadLeaf:"ఆకు ఫోటో అప్‌లోడ్ చేయండి",recommendCrop:"పంట సిఫార్సు",basedSoil:"నేల & సీజన్ ఆధారంగా",weather:"వాతావరణం & నేల",viewConditions:"పొలం పరిస్థితులు చూడండి",community:"పోయినవి & దొరికినవి",reportFind:"వస్తువును నివేదించండి లేదా వెతకండి",aiInsight:"AI వ్యవసాయ సూచన",personalized:"వ్యక్తిగత సిఫార్సు",paddyInsight:"వరి పంటకు అనుకూల పరిస్థితులు",recentActivity:"ఇటీవలి కార్యకలాపాలు",latestActivity:"తాజా కార్యకలాపాలు",cropAnalysisDone:"పంట విశ్లేషణ పూర్తయింది",recommendationGenerated:"పంట సిఫార్సు రూపొందించబడింది",completed:"పూర్తయింది",
+    aiAnalysis:"AI విశ్లేషణ",diseaseTitle:"పంట వ్యాధి గుర్తింపు",diseaseDesc:"సంభావ్య వ్యాధులను గుర్తించడానికి మరియు వ్యవసాయ సూచనలు పొందడానికి పంట లేదా ఆకు స్పష్టమైన ఫోటోను అప్‌లోడ్ చేయండి.",uploadCrop:"పంట ఫోటో అప్‌లోడ్",cropType:"పంట రకం",autoDetect:"ఆటో / AI గుర్తింపు",clickUpload:"అప్‌లోడ్ చేయడానికి క్లిక్ చేయండి",analyzeAI:"AIతో విశ్లేషించండి",analysisResults:"AI విశ్లేషణ ఫలితాలు",uploadStart:"ఫోటో అప్‌లోడ్ చేసి విశ్లేషణ ప్రారంభించండి",
+    smartRecommendation:"స్మార్ట్ సిఫార్సు",recommendationTitle:"పంట సిఫార్సు",recommendationDesc:"వ్యక్తిగత పంట సూచనల కోసం పొలం వివరాలను నమోదు చేయండి.",location:"స్థానం",season:"సీజన్",soilType:"నేల రకం",water:"నీటి లభ్యత",generate:"AI సిఫార్సు రూపొందించండి",
+    farmConditions:"పొలం పరిస్థితులు",weatherTitle:"వాతావరణం & నేల",weatherDesc:"వ్యవసాయాన్ని ప్రభావితం చేసే పర్యావరణ పరిస్థితులను గమనించండి.",updateLocation:"స్థానం అప్‌డేట్",refresh:"రిఫ్రెష్",forecast:"7 రోజుల వాతావరణం",soilConditions:"నేల పరిస్థితులు",
+    communityTitle:"పోయినవి & దొరికినవి",communityDesc:"పోయిన లేదా దొరికిన వస్తువులను నివేదించి సమాజానికి సహాయం చేయండి.",reportItem:"వస్తువు నివేదించండి",returnedTitle:"తిరిగి ఇచ్చిన వస్తువులు",returnedDesc:"యజమానులకు తిరిగి ఇచ్చిన వస్తువుల చరిత్రను చూడండి",administration:"నిర్వహణ",adminTitle:"అడ్మిన్ ప్యానెల్",adminDesc:"వినియోగదారులు మరియు పోస్టులను నిర్వహించండి",totalUsers:"మొత్తం వినియోగదారులు",activePosts:"క్రియాశీల పోస్టులు",returnedCount:"తిరిగి ఇచ్చినవి",flagged:"ఫ్లాగ్ చేసినవి",moderation:"మోడరేషన్ జాబితా",noNotifications:"కొత్త నోటిఫికేషన్లు లేవు"
+  },
+  kn:{
+    dashboard:"ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",cropDisease:"ಬೆಳೆ ರೋಗ AI",cropRecommendation:"ಬೆಳೆ ಶಿಫಾರಸು",weatherSoil:"ಹವಾಮಾನ ಮತ್ತು ಮಣ್ಣು",lostFound:"ಕಳೆದುಹೋದ ಮತ್ತು ಸಿಕ್ಕಿದವು",returned:"ಹಿಂತಿರುಗಿದ ಇತಿಹಾಸ",admin:"ಅಡ್ಮಿನ್ ಪ್ಯಾನೆಲ್",logout:"ಲಾಗ್‌ಔಟ್",search:"ಬೆಳೆಗಳು, ವಸ್ತುಗಳು, ವರದಿಗಳನ್ನು ಹುಡುಕಿ...",aiFarming:"AI ಆಧಾರಿತ ಕೃಷಿ",heroTitle:"ಸ್ಮಾರ್ಟ್ ಕೃಷಿ ಇಲ್ಲಿ ಆರಂಭವಾಗುತ್ತದೆ",heroDesc:"ಬೆಳೆಗಳನ್ನು ವಿಶ್ಲೇಷಿಸಿ, ಹೊಲದ ಸ್ಥಿತಿಯನ್ನು ತಿಳಿದುಕೊಳ್ಳಿ ಮತ್ತು ವೈಯಕ್ತಿಕ ಬೆಳೆ ಶಿಫಾರಸುಗಳನ್ನು ಪಡೆಯಿರಿ.",analyzeCrop:"ಬೆಳೆ ವಿಶ್ಲೇಷಿಸಿ",temperature:"ತಾಪಮಾನ",humidity:"ತೇವಾಂಶ",rainChance:"ಮಳೆಯ ಸಾಧ್ಯತೆ",soilPh:"ಮಣ್ಣಿನ pH",quickActions:"ತ್ವರಿತ ಕಾರ್ಯಗಳು",startAnalysis:"ಕೃಷಿ ವಿಶ್ಲೇಷಣೆ ಪ್ರಾರಂಭಿಸಿ",cropDisease:"ಬೆಳೆ ರೋಗ",uploadLeaf:"ಎಲೆಯ ಚಿತ್ರ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",recommendCrop:"ಬೆಳೆ ಶಿಫಾರಸು",basedSoil:"ಮಣ್ಣು ಮತ್ತು ಋತುವಿನ ಆಧಾರದಲ್ಲಿ",weather:"ಹವಾಮಾನ ಮತ್ತು ಮಣ್ಣು",viewConditions:"ಹೊಲದ ಸ್ಥಿತಿ ನೋಡಿ",community:"ಕಳೆದುಹೋದ ಮತ್ತು ಸಿಕ್ಕಿದವು",reportFind:"ವಸ್ತು ವರದಿ ಮಾಡಿ ಅಥವಾ ಹುಡುಕಿ",aiInsight:"AI ಕೃಷಿ ಸಲಹೆ",personalized:"ವೈಯಕ್ತಿಕ ಸಲಹೆ",paddyInsight:"ಭತ್ತಕ್ಕೆ ಉತ್ತಮ ಪರಿಸ್ಥಿತಿಗಳು",recentActivity:"ಇತ್ತೀಚಿನ ಚಟುವಟಿಕೆ",latestActivity:"ಇತ್ತೀಚಿನ ಚಟುವಟಿಕೆ",cropAnalysisDone:"ಬೆಳೆ ವಿಶ್ಲೇಷಣೆ ಪೂರ್ಣಗೊಂಡಿದೆ",recommendationGenerated:"ಬೆಳೆ ಶಿಫಾರಸು ಸಿದ್ಧವಾಗಿದೆ",completed:"ಪೂರ್ಣಗೊಂಡಿದೆ",aiAnalysis:"AI ವಿಶ್ಲೇಷಣೆ",diseaseTitle:"ಬೆಳೆ ರೋಗ ಪತ್ತೆ",diseaseDesc:"ರೋಗ ಪತ್ತೆ ಮತ್ತು ಕೃಷಿ ಸಲಹೆಗಾಗಿ ಸ್ಪಷ್ಟವಾದ ಬೆಳೆ ಅಥವಾ ಎಲೆಯ ಚಿತ್ರವನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ.",uploadCrop:"ಬೆಳೆ ಚಿತ್ರ ಅಪ್‌ಲೋಡ್",cropType:"ಬೆಳೆ ಪ್ರಕಾರ",autoDetect:"ಆಟೋ / AI ಪತ್ತೆ",clickUpload:"ಅಪ್‌ಲೋಡ್ ಮಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ",analyzeAI:"AI ಮೂಲಕ ವಿಶ್ಲೇಷಿಸಿ",analysisResults:"AI ವಿಶ್ಲೇಷಣೆ ಫಲಿತಾಂಶ",uploadStart:"ಚಿತ್ರ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ ವಿಶ್ಲೇಷಣೆ ಪ್ರಾರಂಭಿಸಿ",smartRecommendation:"ಸ್ಮಾರ್ಟ್ ಶಿಫಾರಸು",recommendationTitle:"ಬೆಳೆ ಶಿಫಾರಸು",recommendationDesc:"ವೈಯಕ್ತಿಕ ಬೆಳೆ ಸಲಹೆಗಾಗಿ ಹೊಲದ ವಿವರಗಳನ್ನು ನಮೂದಿಸಿ.",location:"ಸ್ಥಳ",season:"ಋತು",soilType:"ಮಣ್ಣಿನ ಪ್ರಕಾರ",water:"ನೀರಿನ ಲಭ್ಯತೆ",generate:"AI ಶಿಫಾರಸು ರಚಿಸಿ",farmConditions:"ಹೊಲದ ಪರಿಸ್ಥಿತಿಗಳು",weatherTitle:"ಹವಾಮಾನ ಮತ್ತು ಮಣ್ಣು",weatherDesc:"ಕೃಷಿಯ ಮೇಲೆ ಪರಿಣಾಮ ಬೀರುವ ಪರಿಸ್ಥಿತಿಗಳನ್ನು ಗಮನಿಸಿ.",updateLocation:"ಸ್ಥಳ ನವೀಕರಿಸಿ",refresh:"ರಿಫ್ರೆಶ್",forecast:"7 ದಿನಗಳ ಮುನ್ಸೂಚನೆ",soilConditions:"ಮಣ್ಣಿನ ಪರಿಸ್ಥಿತಿಗಳು",communityTitle:"ಕಳೆದುಹೋದ ಮತ್ತು ಸಿಕ್ಕಿದವು",communityDesc:"ಕಳೆದುಹೋದ ಅಥವಾ ಸಿಕ್ಕಿದ ವಸ್ತುಗಳನ್ನು ವರದಿ ಮಾಡಿ.",reportItem:"ವಸ್ತು ವರದಿ ಮಾಡಿ",returnedTitle:"ಹಿಂತಿರುಗಿಸಿದ ವಸ್ತುಗಳು",returnedDesc:"ಮಾಲೀಕರಿಗೆ ಹಿಂತಿರುಗಿಸಿದ ವಸ್ತುಗಳ ಇತಿಹಾಸ",administration:"ಆಡಳಿತ",adminTitle:"ಅಡ್ಮಿನ್ ಪ್ಯಾನೆಲ್",adminDesc:"ಬಳಕೆದಾರರು ಮತ್ತು ಪೋಸ್ಟ್‌ಗಳನ್ನು ನಿರ್ವಹಿಸಿ",totalUsers:"ಒಟ್ಟು ಬಳಕೆದಾರರು",activePosts:"ಸಕ್ರಿಯ ಪೋಸ್ಟ್‌ಗಳು",returnedCount:"ಹಿಂತಿರುಗಿಸಿದವು",flagged:"ಫ್ಲ್ಯಾಗ್ ಮಾಡಿದವು",moderation:"ಮಾಡರೇಶನ್ ಪಟ್ಟಿ",noNotifications:"ಹೊಸ ಅಧಿಸೂಚನೆಗಳಿಲ್ಲ"
+  },
+  ta:{
+    dashboard:"டாஷ்போர்டு",cropDisease:"பயிர் நோய் AI",cropRecommendation:"பயிர் பரிந்துரை",weatherSoil:"வானிலை & மண்",lostFound:"தொலைந்தவை & கிடைத்தவை",returned:"திரும்பிய வரலாறு",admin:"நிர்வாகப் பலகை",logout:"வெளியேறு",search:"பயிர்கள், பொருட்கள், அறிக்கைகளை தேடுங்கள்...",aiFarming:"AI விவசாயம்",heroTitle:"ஸ்மார்ட் விவசாயம் இங்கே தொடங்குகிறது",heroDesc:"பயிர்களை பகுப்பாய்வு செய்து, வயல் நிலையை அறிந்து, தனிப்பட்ட பயிர் பரிந்துரைகளைப் பெறுங்கள்.",analyzeCrop:"பயிரை பகுப்பாய்வு செய்",temperature:"வெப்பநிலை",humidity:"ஈரப்பதம்",rainChance:"மழை வாய்ப்பு",soilPh:"மண் pH",quickActions:"விரைவு செயல்கள்",startAnalysis:"விவசாய பகுப்பாய்வைத் தொடங்குங்கள்",cropDisease:"பயிர் நோய்",uploadLeaf:"இலை படத்தை பதிவேற்றவும்",recommendCrop:"பயிர் பரிந்துரை",basedSoil:"மண் மற்றும் பருவத்தின் அடிப்படையில்",weather:"வானிலை & மண்",viewConditions:"வயல் நிலையைப் பார்க்கவும்",community:"தொலைந்தவை & கிடைத்தவை",reportFind:"பொருளை பதிவு செய்யவும் அல்லது தேடவும்",aiInsight:"AI விவசாய ஆலோசனை",personalized:"தனிப்பட்ட பரிந்துரை",paddyInsight:"நெல் பயிருக்கு ஏற்ற நிலை",recentActivity:"சமீபத்திய செயல்பாடு",latestActivity:"சமீபத்திய செயல்பாடுகள்",cropAnalysisDone:"பயிர் பகுப்பாய்வு முடிந்தது",recommendationGenerated:"பயிர் பரிந்துரை உருவாக்கப்பட்டது",completed:"முடிந்தது",aiAnalysis:"AI பகுப்பாய்வு",diseaseTitle:"பயிர் நோய் கண்டறிதல்",diseaseDesc:"நோயை கண்டறிந்து விவசாய வழிகாட்டுதலைப் பெற தெளிவான பயிர் அல்லது இலை படத்தை பதிவேற்றவும்.",uploadCrop:"பயிர் படத்தை பதிவேற்றவும்",cropType:"பயிர் வகை",autoDetect:"ஆட்டோ / AI கண்டறிதல்",clickUpload:"பதிவேற்ற கிளிக் செய்யவும்",analyzeAI:"AI மூலம் பகுப்பாய்வு",analysisResults:"AI பகுப்பாய்வு முடிவுகள்",uploadStart:"படத்தை பதிவேற்றி பகுப்பாய்வைத் தொடங்கவும்",smartRecommendation:"ஸ்மார்ட் பரிந்துரை",recommendationTitle:"பயிர் பரிந்துரை",recommendationDesc:"தனிப்பட்ட பயிர் பரிந்துரைக்க வயல் விவரங்களை உள்ளிடவும்.",location:"இடம்",season:"பருவம்",soilType:"மண் வகை",water:"நீர் கிடைக்கும் நிலை",generate:"AI பரிந்துரையை உருவாக்கு",farmConditions:"வயல் நிலை",weatherTitle:"வானிலை & மண்",weatherDesc:"விவசாயத்தை பாதிக்கும் சுற்றுச்சூழல் நிலைகளை கண்காணிக்கவும்.",updateLocation:"இடத்தை புதுப்பிக்கவும்",refresh:"புதுப்பி",forecast:"7 நாள் முன்னறிவிப்பு",soilConditions:"மண் நிலை",communityTitle:"தொலைந்தவை & கிடைத்தவை",communityDesc:"தொலைந்த அல்லது கிடைத்த பொருட்களை பதிவு செய்யுங்கள்.",reportItem:"பொருளை பதிவு செய்",returnedTitle:"திரும்பிய பொருட்கள்",returnedDesc:"உரிமையாளர்களிடம் திரும்பிய பொருட்களின் வரலாறு",administration:"நிர்வாகம்",adminTitle:"நிர்வாகப் பலகை",adminDesc:"பயனர்கள் மற்றும் பதிவுகளை நிர்வகிக்கவும்",totalUsers:"மொத்த பயனர்கள்",activePosts:"செயலில் உள்ள பதிவுகள்",returnedCount:"திரும்பியவை",flagged:"குறிக்கப்பட்டவை",moderation:"மதிப்பாய்வு பட்டியல்",noNotifications:"புதிய அறிவிப்புகள் இல்லை"
+  },
+  ml:{
+    dashboard:"ഡാഷ്ബോർഡ്",cropDisease:"വിള രോഗ AI",cropRecommendation:"വിള ശുപാർശ",weatherSoil:"കാലാവസ്ഥ & മണ്ണ്",lostFound:"നഷ്ടപ്പെട്ടതും കണ്ടെത്തിയതും",returned:"തിരികെ നൽകിയ ചരിത്രം",admin:"അഡ്മിൻ പാനൽ",logout:"ലോഗൗട്ട്",search:"വിളകൾ, വസ്തുക്കൾ, റിപ്പോർട്ടുകൾ തിരയുക...",aiFarming:"AI കൃഷി",heroTitle:"സ്മാർട്ട് കൃഷി ഇവിടെ ആരംഭിക്കുന്നു",heroDesc:"വിളകൾ വിശകലനം ചെയ്യുക, കൃഷിയിടത്തിന്റെ അവസ്ഥ മനസ്സിലാക്കുക, വ്യക്തിഗത വിള ശുപാർശകൾ നേടുക.",analyzeCrop:"വിള വിശകലനം ചെയ്യുക",temperature:"താപനില",humidity:"ഈർപ്പം",rainChance:"മഴ സാധ്യത",soilPh:"മണ്ണിന്റെ pH",quickActions:"ദ്രുത പ്രവർത്തനങ്ങൾ",startAnalysis:"കൃഷി വിശകലനം ആരംഭിക്കുക",cropDisease:"വിള രോഗം",uploadLeaf:"ഇലയുടെ ചിത്രം അപ്‌ലോഡ് ചെയ്യുക",recommendCrop:"വിള ശുപാർശ",basedSoil:"മണ്ണും സീസണും അടിസ്ഥാനമാക്കി",weather:"കാലാവസ്ഥ & മണ്ണ്",viewConditions:"കൃഷിയിടത്തിന്റെ അവസ്ഥ കാണുക",community:"നഷ്ടപ്പെട്ടതും കണ്ടെത്തിയതും",reportFind:"വസ്തു റിപ്പോർട്ട് ചെയ്യുക അല്ലെങ്കിൽ കണ്ടെത്തുക",aiInsight:"AI കൃഷി നിർദ്ദേശം",personalized:"വ്യക്തിഗത ശുപാർശ",paddyInsight:"നെല്ലിന് അനുയോജ്യമായ സാഹചര്യങ്ങൾ",recentActivity:"സമീപകാല പ്രവർത്തനം",latestActivity:"ഏറ്റവും പുതിയ പ്രവർത്തനങ്ങൾ",cropAnalysisDone:"വിള വിശകലനം പൂർത്തിയായി",recommendationGenerated:"വിള ശുപാർശ തയ്യാറായി",completed:"പൂർത്തിയായി",aiAnalysis:"AI വിശകലനം",diseaseTitle:"വിള രോഗ കണ്ടെത്തൽ",diseaseDesc:"രോഗം കണ്ടെത്താനും കൃഷി മാർഗനിർദ്ദേശം ലഭിക്കാനും വ്യക്തമായ വിളയുടെയോ ഇലയുടെയോ ചിത്രം അപ്‌ലോഡ് ചെയ്യുക.",uploadCrop:"വിള ചിത്രം അപ്‌ലോഡ് ചെയ്യുക",cropType:"വിളയുടെ തരം",autoDetect:"ഓട്ടോ / AI കണ്ടെത്തൽ",clickUpload:"അപ്‌ലോഡ് ചെയ്യാൻ ക്ലിക്ക് ചെയ്യുക",analyzeAI:"AI ഉപയോഗിച്ച് വിശകലനം ചെയ്യുക",analysisResults:"AI വിശകലന ഫലങ്ങൾ",uploadStart:"ചിത്രം അപ്‌ലോഡ് ചെയ്ത് വിശകലനം ആരംഭിക്കുക",smartRecommendation:"സ്മാർട്ട് ശുപാർശ",recommendationTitle:"വിള ശുപാർശ",recommendationDesc:"വ്യക്തിഗത വിള നിർദ്ദേശങ്ങൾക്കായി കൃഷിയിട വിവരങ്ങൾ നൽകുക.",location:"സ്ഥലം",season:"സീസൺ",soilType:"മണ്ണിന്റെ തരം",water:"ജല ലഭ്യത",generate:"AI ശുപാർശ തയ്യാറാക്കുക",farmConditions:"കൃഷിയിട സാഹചര്യം",weatherTitle:"കാലാവസ്ഥ & മണ്ണ്",weatherDesc:"കൃഷിയെ ബാധിക്കുന്ന പരിസ്ഥിതി സാഹചര്യങ്ങൾ നിരീക്ഷിക്കുക.",updateLocation:"സ്ഥലം പുതുക്കുക",refresh:"പുതുക്കുക",forecast:"7 ദിവസത്തെ പ്രവചനം",soilConditions:"മണ്ണിന്റെ അവസ്ഥ",communityTitle:"നഷ്ടപ്പെട്ടതും കണ്ടെത്തിയതും",communityDesc:"നഷ്ടപ്പെട്ടതോ കണ്ടെത്തിയതോ ആയ വസ്തുക്കൾ റിപ്പോർട്ട് ചെയ്യുക.",reportItem:"വസ്തു റിപ്പോർട്ട് ചെയ്യുക",returnedTitle:"തിരികെ നൽകിയ വസ്തുക്കൾ",returnedDesc:"ഉടമകൾക്ക് തിരികെ നൽകിയ വസ്തുക്കളുടെ ചരിത്രം",administration:"അഡ്മിനിസ്ട്രേഷൻ",adminTitle:"അഡ്മിൻ പാനൽ",adminDesc:"ഉപയോക്താക്കളെയും പോസ്റ്റുകളെയും നിയന്ത്രിക്കുക",totalUsers:"ആകെ ഉപയോക്താക്കൾ",activePosts:"സജീവ പോസ്റ്റുകൾ",returnedCount:"തിരികെ നൽകിയവ",flagged:"ഫ്ലാഗ് ചെയ്തവ",moderation:"മോഡറേഷൻ പട്ടിക",noNotifications:"പുതിയ അറിയിപ്പുകളില്ല"
+  }
+};
+
+function t(key){return (translations[currentLanguage]&&translations[currentLanguage][key])||translations.en[key]||key}
+function setText(selector,key){const el=document.querySelector(selector);if(el)el.textContent=t(key)}
+function changeLanguage(lang){
+  currentLanguage=lang; localStorage.setItem("agri_language",lang);
+  applyLanguage();
+  toast("Language changed to "+document.querySelector(`#languageSelect option[value="${lang}"]`).textContent);
+}
+function applyLanguage(){
+  const lang=currentLanguage;
+  const map={
+    '.nav[data-page="dashboard"] span':"dashboard",
+    '.nav[data-page="crop"] span':"cropDisease",
+    '.nav[data-page="recommend"] span':"cropRecommendation",
+    '.nav[data-page="weather"] span':"weatherSoil",
+    '.nav[data-page="lost"] span':"lostFound",
+    '.nav[data-page="returned"] span':"returned",
+    '.nav[data-page="admin"] span':"admin",
+    '.side-footer .nav span':"logout",
+    '#search':"search",
+    '#dashboard .eyebrow':"aiFarming",
+    '#dashboard .hero h1':"heroTitle",
+    '#dashboard .hero p:not(.eyebrow)':"heroDesc",
+    '#dashboard .hero .primary':"analyzeCrop",
+    '#dashboard .stat:nth-child(1) small':"temperature",
+    '#dashboard .stat:nth-child(2) small':"humidity",
+    '#dashboard .stat:nth-child(3) small':"rainChance",
+    '#dashboard .stat:nth-child(4) small':"soilPh",
+    '#dashboard .quick h2':"quickActions",
+    '#dashboard .quick button:nth-child(1) b':"cropDisease",
+    '#dashboard .quick button:nth-child(1) small':"uploadLeaf",
+    '#dashboard .quick button:nth-child(2) b':"recommendCrop",
+    '#dashboard .quick button:nth-child(2) small':"basedSoil",
+    '#dashboard .quick button:nth-child(3) b':"weather",
+    '#dashboard .quick button:nth-child(3) small':"viewConditions",
+    '#dashboard .quick button:nth-child(4) b':"community",
+    '#dashboard .quick button:nth-child(4) small':"reportFind",
+    '#dashboard .card-head h2':"recentActivity"
+  };
+  Object.entries(map).forEach(([sel,key])=>setText(sel,key));
+  const s=document.getElementById("languageSelect"); if(s)s.value=lang;
+}
+let currentLanguage=localStorage.getItem("agri_language")||"en";
+
+const items=[
+{id:1,name:"Black Wallet",type:"Lost",cat:"Other",date:"2026-10-04",loc:"Main Block",desc:"Black leather wallet with college ID and cards."},
+{id:2,name:"Wireless Earbuds",type:"Found",cat:"Electronics",date:"2026-10-03",loc:"Library",desc:"White earbuds found near the second floor reading area."},
+{id:3,name:"College ID Card",type:"Lost",cat:"Documents",date:"2026-10-02",loc:"Cafeteria",desc:"Student ID card with name printed on the card."},
+{id:4,name:"Bike Keys",type:"Found",cat:"Keys",date:"2026-10-01",loc:"Parking Area",desc:"One bike key with a small blue keychain."}];
+function openPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll(".nav").forEach(n=>n.classList.toggle("active",n.dataset.page===id));if(id==="lost")renderItems();if(id==="admin")renderAdmin();window.scrollTo(0,0);document.getElementById("sidebar").classList.remove("open")}
+document.querySelectorAll(".nav[data-page]").forEach(n=>n.onclick=()=>openPage(n.dataset.page));
+function toggleMenu(){document.getElementById("sidebar").classList.toggle("open")}
+function toast(msg){let t=document.getElementById("toastBox");t.textContent=msg;t.style.display="block";clearTimeout(window.tm);window.tm=setTimeout(()=>t.style.display="none",2400)}
+function preview(e){let f=e.target.files[0];if(!f)return;let img=document.getElementById("cropPreview");img.src=URL.createObjectURL(f);img.classList.remove("hidden");document.getElementById("dropText").classList.add("hidden")}
+function analyze(){
+  const file=document.getElementById("cropFile").files[0];
+  if(!file)return toast("Please upload a crop image first");
+
+  const selected=document.getElementById("cropType").value;
+  const filename=file.name.toLowerCase();
+
+  /*
+   * IMPORTANT:
+   * The previous version hard-coded every result to Paddy/Rice Blast.
+   * This version no longer does that. It supports multiple crops and
+   * produces a crop-specific demo result.
+   *
+   * For true automatic disease detection, connect /api/crop/analyze
+   * in the FastAPI backend to a trained PlantVillage/custom model.
+   */
+  let crop=selected;
+  if(crop==="auto"){
+    if(/tomato/.test(filename)) crop="tomato";
+    else if(/potato/.test(filename)) crop="potato";
+    else if(/maize|corn/.test(filename)) crop="maize";
+    else if(/cotton/.test(filename)) crop="cotton";
+    else if(/chilli|pepper/.test(filename)) crop="chilli";
+    else if(/grape/.test(filename)) crop="grape";
+    else if(/apple/.test(filename)) crop="apple";
+    else crop="unknown";
+  }
+
+  const results={
+    rice:{name:"Rice / Paddy",disease:"Rice Blast",confidence:"91%",icon:"🌾",actions:["Remove severely infected leaves where practical.","Avoid excessive nitrogen application.","Maintain appropriate field drainage and monitor humidity.","Consult a local agricultural expert before applying chemicals."]},
+    tomato:{name:"Tomato",disease:"Early Blight",confidence:"89%",icon:"🍅",actions:["Remove affected leaves and plant debris.","Avoid overhead watering.","Improve airflow between plants.","Use locally recommended treatment if confirmed."]},
+    potato:{name:"Potato",disease:"Late Blight",confidence:"88%",icon:"🥔",actions:["Remove heavily affected foliage.","Avoid prolonged leaf wetness.","Improve field drainage and air circulation.","Seek local agricultural guidance for treatment."]},
+    maize:{name:"Maize / Corn",disease:"Northern Corn Leaf Blight",confidence:"86%",icon:"🌽",actions:["Remove heavily affected crop residue where practical.","Monitor field humidity and leaf wetness.","Maintain recommended plant spacing.","Confirm with an agricultural expert before treatment."]},
+    cotton:{name:"Cotton",disease:"Leaf Spot",confidence:"84%",icon:"🌿",actions:["Remove severely affected plant material where appropriate.","Avoid excess irrigation.","Monitor nearby plants for spread.","Use locally approved treatment only after confirmation."]},
+    chilli:{name:"Chilli",disease:"Leaf Spot",confidence:"85%",icon:"🌶️",actions:["Remove affected leaves.","Avoid overhead irrigation.","Improve field ventilation.","Monitor the crop regularly for progression."]},
+    grape:{name:"Grape",disease:"Powdery Mildew",confidence:"87%",icon:"🍇",actions:["Improve canopy airflow.","Monitor humidity and leaf wetness.","Remove badly affected material where appropriate.","Follow local crop-protection guidance."]},
+    apple:{name:"Apple",disease:"Apple Scab",confidence:"88%",icon:"🍎",actions:["Remove infected fallen leaves.","Improve orchard sanitation.","Monitor wet weather periods closely.","Confirm diagnosis before applying treatment."]},
+    unknown:{name:"Crop not confidently identified",disease:"Needs AI model analysis",confidence:"—",icon:"🌱",actions:["The current browser demo cannot reliably identify an unknown crop from pixels alone.","Select the crop type if known, or connect the FastAPI endpoint to a trained crop/disease vision model.","Do not apply pesticide based only on this demo result."]}
+  };
+
+  const r=results[crop]||results.unknown;
+  document.getElementById("analysis").classList.remove("empty");
+  document.getElementById("analysis").innerHTML=
+    `<h2>✦ AI Analysis Result</h2>
+     <p>Crop: <b>${r.icon} ${r.name}</b></p>
+     <h3>Possible issue: <span class="warning">${r.disease}</span></h3>
+     <p>Demo confidence: <b>${r.confidence}</b></p>
+     <p class="muted">Analysis mode: ${selected==="auto" ? "Auto / model-ready" : "Crop selected by user"}</p>
+     <hr><h3>Recommended Actions</h3>
+     <ul>${r.actions.map(a=>`<li>${a}</li>`).join("")}</ul>
+     <p class="muted"><b>Production note:</b> Connect this page to the backend vision model for real image-based diagnosis.</p>`;
+}
+
+const apLocationProfiles={
+alluri:{crops:["Coffee","Turmeric","Paddy"],scores:[93,89,84],villages:["Paderu","Araku Valley","Hukumpeta","Munchingiputtu"]},
+anakapalli:{crops:["Paddy","Sugarcane","Maize"],scores:[94,90,85],villages:["Anakapalle","Narsipatnam","Yelamanchili","Chodavaram"]},
+ananthapuramu:{crops:["Groundnut","Sunflower","Red Gram"],scores:[95,88,82],villages:["Anantapur","Tadipatri","Gooty","Rayadurg"]},
+annamayya:{crops:["Groundnut","Tomato","Red Gram"],scores:[94,89,83],villages:["Rayachoti","Rajampet","Madanapalle","Kodur"]},
+bapatla:{crops:["Paddy","Chilli","Cotton"],scores:[95,91,84],villages:["Bapatla","Repalle","Ponnur","Tenali"]},
+chittoor:{crops:["Mango","Groundnut","Tomato"],scores:[93,88,84],villages:["Chittoor","Palamaner","Madanapalle","Punganur"]},
+eastgodavari:{crops:["Paddy","Coconut","Banana"],scores:[96,91,87],villages:["Rajamahendravaram","Amalapuram","Mandapeta","Razole"]},
+eluru:{crops:["Paddy","Maize","Banana"],scores:[96,89,85],villages:["Eluru","Jangareddygudem","Nuzvid","Bhimadole"]},
+guntur:{crops:["Chilli","Cotton","Paddy"],scores:[95,90,86],villages:["Guntur","Tenali","Mangalagiri","Narasaraopet"]},
+kakinada:{crops:["Paddy","Coconut","Banana"],scores:[96,91,87],villages:["Kakinada","Peddapuram","Prathipadu","Tuni"]},
+konaseema:{crops:["Coconut","Paddy","Banana"],scores:[95,93,89],villages:["Amalapuram","Razole","Mummidivaram","Kothapeta"]},
+krishna:{crops:["Paddy","Maize","Chilli"],scores:[96,90,87],villages:["Machilipatnam","Gudivada","Vuyyuru","Nandigama"]},
+kurnool:{crops:["Groundnut","Cotton","Sunflower"],scores:[94,89,84],villages:["Kurnool","Adoni","Nandikotkur","Dhone"]},
+manyam:{crops:["Paddy","Turmeric","Millets"],scores:[91,87,84],villages:["Parvathipuram","Salur","Kurupam","Palakonda"]},
+markapuram:{crops:["Cotton","Chickpea","Groundnut"],scores:[91,88,84],villages:["Markapuram","Giddalur","Podili","Darsi"]},
+nandyal:{crops:["Chickpea","Cotton","Groundnut"],scores:[94,89,85],villages:["Nandyal","Dhone","Atmakur","Banaganapalle"]},
+ntr:{crops:["Paddy","Maize","Chilli"],scores:[95,90,86],villages:["Vijayawada","Jaggayyapeta","Tiruvuru","Nandigama"]},
+palnadu:{crops:["Chilli","Cotton","Paddy"],scores:[95,90,85],villages:["Narasaraopet","Sattenapalle","Piduguralla","Vinukonda"]},
+prakasam:{crops:["Cotton","Chickpea","Groundnut"],scores:[92,89,85],villages:["Ongole","Kandukur","Markapur","Chirala"]},
+polavaram:{crops:["Paddy","Turmeric","Maize"],scores:[94,89,84],villages:["Polavaram","Buttaigudem","Jeelugumilli","Kukunoor"]},
+spsr:{crops:["Paddy","Black Gram","Groundnut"],scores:[95,89,84],villages:["Nellore","Kavali","Gudur","Atmakur"]},
+srisathyasai:{crops:["Groundnut","Sunflower","Millets"],scores:[95,89,83],villages:["Puttaparthi","Dharmavaram","Kadiri","Hindupur"]},
+srikakulam:{crops:["Paddy","Cashew","Coconut"],scores:[94,89,85],villages:["Srikakulam","Palasa","Amadalavalasa","Tekkali"]},
+tirupati:{crops:["Paddy","Groundnut","Mango"],scores:[95,91,86],villages:["Tirupati","Srikalahasti","Sullurpeta","Chandragiri"]},
+visakhapatnam:{crops:["Paddy","Cashew","Banana"],scores:[91,88,84],villages:["Bheemunipatnam","Anandapuram","Padmanabham","Pendurthi"]},
+vizianagaram:{crops:["Paddy","Maize","Groundnut"],scores:[93,88,84],villages:["Vizianagaram","Bobbili","Gajapathinagaram","Salur"]},
+westgodavari:{crops:["Paddy","Banana","Coconut"],scores:[97,92,88],villages:["Bhimavaram","Tadepalligudem","Tanuku","Narsapuram"]},
+ysr:{crops:["Groundnut","Red Gram","Cotton"],scores:[94,88,84],villages:["Kadapa","Proddatur","Pulivendula","Rayachoti"]}
+};
+const apLocationNames=Object.fromEntries([
+["alluri","Alluri Sitharama Raju"],["anakapalli","Anakapalli"],["ananthapuramu","Ananthapuramu"],["annamayya","Annamayya"],["bapatla","Bapatla"],["chittoor","Chittoor"],["eastgodavari","East Godavari"],["eluru","Eluru"],["guntur","Guntur"],["kakinada","Kakinada"],["konaseema","Dr. B.R. Ambedkar Konaseema"],["krishna","Krishna"],["kurnool","Kurnool"],["manyam","Manyam"],["markapuram","Markapuram"],["nandyal","Nandyal"],["ntr","NTR"],["palnadu","Palnadu"],["prakasam","Prakasam"],["polavaram","Polavaram"],["spsr","SPSR Nellore"],["srisathyasai","Sri Sathya Sai"],["srikakulam","Srikakulam"],["tirupati","Tirupati"],["visakhapatnam","Visakhapatnam"],["vizianagaram","Vizianagaram"],["westgodavari","West Godavari"],["ysr","YSR Kadapa"]
+]);
+function populateVillages(loc){
+  const p=apLocationProfiles[loc]||{};
+  const villages=p.villages||[];
+  ["farmVillage","weatherVillage"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    const old=el.value;
+    el.innerHTML='<option value="">Select village</option>'+villages.map(v=>`<option value="${v}">${v}</option>`).join("");
+    if(villages.includes(old))el.value=old;
+  });
+}
+function villageAdjustment(village){
+  if(!village)return 0;
+  let n=0;
+  for(let i=0;i<village.length;i++) n=(n+village.charCodeAt(i)*(i+3))%9;
+  return (n%7)-3; // -3 to +3, so every village can change the match %
+}
+function updateFarmLocation(id){
+  if(!id)return;
+  localStorage.setItem("agri_ap_location",id);
+  localStorage.removeItem("agri_ap_village");
+  const p=apLocationProfiles[id]||{};
+  const name=apLocationNames[id]||id;
+  const weather=document.getElementById("weatherDistrict");
+  const farm=document.getElementById("farmLocation");
+  if(weather)weather.value=id;
+  if(farm)farm.value=id;
+  populateVillages(id);
+  const w=document.getElementById("weatherLocation");
+  if(w)w.textContent=`📍 ${name}, Andhra Pradesh`;
+  const wt=document.getElementById("weatherTemp");
+  if(wt&&p.temp)wt.textContent=p.temp+"°C";
+  const wc=document.getElementById("weatherCondition");
+  if(wc&&p.rain)wc.textContent=`Local demo conditions · ${p.rain}% rain chance · ${p.humidity}% humidity`;
+  recommend();
+}
+function updateFarmVillage(village){
+  if(!village)return;
+  localStorage.setItem("agri_ap_village",village);
+  const f=document.getElementById("farmVillage"), w=document.getElementById("weatherVillage");
+  if(f)f.value=village;
+  if(w)w.value=village;
+  recommend();
+  toast(`Village updated: ${village}`);
+}
+function restoreAPLocation(){
+  const id=localStorage.getItem("agri_ap_location")||"guntur";
+  updateFarmLocation(id);
+  const village=localStorage.getItem("agri_ap_village");
+  if(village)updateFarmVillage(village);
+}
+function recommend(){
+  const ph=Number(document.getElementById("ph").value||6.5);
+  const loc=document.getElementById("farmLocation")?.value||localStorage.getItem("agri_ap_location")||"guntur";
+  const village=document.getElementById("farmVillage")?.value||localStorage.getItem("agri_ap_village")||"";
+  const p=apLocationProfiles[loc]||{crops:["Paddy","Maize","Groundnut"],scores:[94,88,82]};
+  const crops=p.crops||["Paddy","Maize","Groundnut"];
+  const scores=p.scores||[94,88,82];
+  const icons=["🌾","🌱","🥜"];
+  const adj=villageAdjustment(village);
+  const phAdj=ph<5.5?-5:ph>8? -4:0;
+  const cards=crops.slice(0,3).map((name,i)=>{
+    let score=Math.max(65,Math.min(99,(scores[i]||80)+adj+phAdj));
+    return [icons[i],name,score];
+  });
+  const place=(apLocationNames[loc]||"your selected district")+(village?` · ${village}`:"");
+  document.getElementById("recs").innerHTML=cards.map(x=>`<div class="rec"><div class="rec-icon">${x[0]}</div><h2>${x[1]}</h2><div class="score">${x[2]}% match</div><p class="muted">AI recommendation for <b>${place}</b> using location, village, soil inputs and season.</p><hr><b>AI guidance</b><p class="muted">This demo score changes when the village, location or soil pH changes. For production use, connect verified soil, weather and crop-history data.</p></div>`).join("");
+}
+function modal(show){document.getElementById("modal").classList.toggle("show",show);if(show)document.getElementById("idate").value=new Date().toISOString().slice(0,10)}
+function addItem(){let name=document.getElementById("iname").value.trim();if(!name)return toast("Please enter an item name");items.unshift({id:Date.now(),name,type:document.getElementById("itype").value,cat:document.getElementById("icat").value,date:document.getElementById("idate").value,loc:document.getElementById("iloc").value||"Not specified",desc:document.getElementById("idesc").value||"No description provided."});modal(false);renderItems();toast("Item report submitted successfully")}
+function renderItems(){let q=(document.getElementById("itemSearch")?.value||"").toLowerCase(),c=document.getElementById("cat")?.value||"",t=document.getElementById("type")?.value||"";let a=items.filter(x=>(!q||(x.name+x.desc).toLowerCase().includes(q))&&(!c||x.cat===c)&&(!t||x.type===t));document.getElementById("items").innerHTML=a.map(x=>`<div class="item"><div class="item-top"><span class="tag ${x.type==="Found"?"found":""}">${x.type}</span><small>${x.date}</small></div><h3>${x.name}</h3><p>${x.desc}</p><div class="meta">📍 ${x.loc}<br>🏷️ ${x.cat}</div><button class="claim" onclick="claim('${x.name}')">${x.type==="Found"?"Claim This Item":"I Found This Item"}</button></div>`).join("")||'<div class="card"><h2>No items found</h2><p class="muted">Try changing your filters.</p></div>'}
+function claim(name){toast("Claim request submitted for "+name)}
+function renderAdmin(){document.getElementById("moderation").innerHTML=items.slice(0,4).map(x=>`<div class="activity"><div class="activity-icon">🎒</div><div><b>${x.name}</b><small>${x.type} · ${x.loc} · ${x.date}</small></div><button class="remove" onclick="removeItem(${x.id})">Remove</button></div>`).join("")}
+function removeItem(id){let i=items.findIndex(x=>x.id===id);if(i>-1)items.splice(i,1);renderAdmin();renderItems();toast("Post removed")}
+function globalSearch(){let q=document.getElementById("search").value.toLowerCase();if(/lost|found|wallet|key|earbud/.test(q))openPage("lost")}
+renderItems();recommend();
+
+let authMode="login";
+function showLogin(){
+  authMode="login";
+  document.getElementById("loginTab").classList.add("active");
+  document.getElementById("registerTab").classList.remove("active");
+  document.getElementById("nameField").classList.add("hidden");
+  document.getElementById("authButton").textContent="Login";
+}
+function showRegister(){
+  authMode="register";
+  document.getElementById("registerTab").classList.add("active");
+  document.getElementById("loginTab").classList.remove("active");
+  document.getElementById("nameField").classList.remove("hidden");
+  document.getElementById("authButton").textContent="Create Account";
+}
+function handleAuth(e){
+  e.preventDefault();
+  const email=document.getElementById("email").value.trim();
+  const name=document.getElementById("fullName").value.trim();
+  if(authMode==="register" && !name){toast("Please enter your name");return}
+  localStorage.setItem("agri_logged_in","true");
+  localStorage.setItem("agri_email",email);
+  localStorage.setItem("agri_name",name || "Farmer");
+  document.getElementById("loginScreen").style.display="none";
+  document.getElementById("loggedUserRole").textContent=name || "Farmer";
+  toast(authMode==="register" ? "Account created successfully" : "Login successful");
+}
+function logout(){
+  localStorage.removeItem("agri_logged_in");
+  document.getElementById("loginScreen").style.display="grid";
+  showLogin();
+  toast("You have been logged out");
+}
+function requestLocation(){
+  if(!navigator.geolocation){
+    updateLocationStatus("Location is not supported by this browser.",false); return;
+  }
+  updateLocationStatus("Requesting location permission...",false);
+  navigator.geolocation.getCurrentPosition(
+    pos=>{
+      const lat=pos.coords.latitude.toFixed(5), lon=pos.coords.longitude.toFixed(5);
+      localStorage.setItem("agri_lat",lat); localStorage.setItem("agri_lon",lon);
+      updateLocationStatus("Location access enabled ✓",true);
+      const w=document.getElementById("weatherLocation");
+      if(w) w.textContent=`📍 Location enabled · ${lat}, ${lon}`;
+      toast("Location access enabled");
+    },
+    err=>{
+      let msg="Location permission was denied.";
+      if(err.code===2) msg="Location is currently unavailable.";
+      if(err.code===3) msg="Location request timed out.";
+      updateLocationStatus(msg,false);
+      toast(msg);
+    },
+    {enableHighAccuracy:true,timeout:10000,maximumAge:300000}
+  );
+}
+function updateLocationStatus(msg,ok){
+  const el=document.getElementById("locationStatus");
+  if(el){el.textContent=msg;el.classList.toggle("ok",!!ok)}
+}
+function restoreSession(){
+  if(localStorage.getItem("agri_logged_in")==="true"){
+    document.getElementById("loginScreen").style.display="none";
+    document.getElementById("loggedUserRole").textContent=localStorage.getItem("agri_name")||"Farmer";
+    const lat=localStorage.getItem("agri_lat"),lon=localStorage.getItem("agri_lon");
+    if(lat&&lon){
+      updateLocationStatus("Location access enabled ✓",true);
+      const w=document.getElementById("weatherLocation");
+      if(w) w.textContent=`📍 Location enabled · ${lat}, ${lon}`;
+    }
+  }
+}
+restoreSession();
+applyLanguage();
+restoreAPLocation();
+
+
+async function analyzeWithBackend(){
+  const file=document.getElementById("cropFile").files[0];
+  if(!file)return toast("Please upload a crop image first");
+  const form=new FormData();
+  form.append("image",file);
+  try{
+    const response=await fetch("http://127.0.0.1:8000/api/crop/analyze",{method:"POST",body:form});
+    if(!response.ok)throw new Error("Backend analysis failed");
+    const data=await response.json();
+    toast("Live AI analysis received from backend");
+    return data;
+  }catch(e){
+    toast("Live AI backend is not connected; showing demo analysis");
+    analyze();
+  }
+}
+
+</script>
+</body>
+</html>
